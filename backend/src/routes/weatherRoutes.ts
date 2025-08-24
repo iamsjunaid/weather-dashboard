@@ -9,7 +9,6 @@ router.get("/:city", async (req, res) => {
   try {
     const cached = await Weather.findOne({ city });
 
-    // Cache for 10 minutes
     if (cached && Date.now() - cached.updatedAt.getTime() < 10 * 60 * 1000) {
       return res.json(cached.data);
     }
