@@ -1,122 +1,122 @@
-# 🌦️ Weather Dashboard
+# 🌦 Weather Dashboard
 
-A simple weather dashboard built with **React (TypeScript)** and
-**Node.js/Express** that fetches weather data from the [OpenWeather
-API](https://openweathermap.org/api).\
-Users can add and remove cities, view live weather, and benefit from
-caching to reduce API calls.
+A full-stack MERN application that allows users to add cities and view their weather data in a clean dashboard.
 
-------------------------------------------------------------------------
+---
 
-## 🚀 Features
+## 🚀 Live Demo
 
--   Add / remove cities dynamically.
--   Displays real-time weather details (temperature, humidity, pressure,
-    conditions).
--   Caching layer to minimize redundant API calls.
--   Error handling with clear messages.
--   Minimal UI built with TailwindCSS.
+- **Frontend (React + TypeScript + ShadCN UI)**: [Weather Dashboard Frontend](https://weather-dashboard-1-1l6m.onrender.com/)  
+- **Backend (Node.js + Express + MongoDB)**: [Weather Dashboard API](https://weather-dashboard-d2kq.onrender.com)
 
-------------------------------------------------------------------------
+---
 
-## 🗂 Project Structure
+## 📂 Project Structure
 
-    /backend
-      ├── server.ts          # Express server
-      ├── routes/
-      │   ├── cities.ts      # Manage cities (add/remove/list)
-      │   └── weather.ts     # Fetch weather from OpenWeather API
-      ├── services/
-      │   ├── weatherService.ts # Calls OpenWeather API
-      │   └── cache.ts       # Simple in-memory caching
-      └── db.ts              # Database (if persistent storage is used)
+```
+weather-dashboard/
+│── backend/   # Node.js + Express + MongoDB + TypeScript
+│── frontend/  # React + TypeScript + ShadCN UI
+```
 
-    /frontend
-      ├── src/
-      │   ├── components/    # CityForm, CityCard
-      │   ├── pages/         # Dashboard
-      │   └── services/      # API calls to backend
-      ├── App.tsx
-      └── main.tsx
+---
 
-    .gitignore
-    README.md
+## ⚙️ Backend
 
-------------------------------------------------------------------------
+### Tech Stack
+- Node.js + Express.js
+- MongoDB + Mongoose
+- TypeScript
+- Axios (for weather API requests)
+- CORS + dotenv
 
-## ⚙️ Setup Instructions
+### Scripts
+```bash
+# development
+npm run dev
 
-### 1. Clone the Repository
+# build
+npm run build
 
-``` bash
-git clone https://github.com/iamsjunaid/weather-dashboard.git
+# production
+npm start
+```
+
+The backend is deployed on Render:  
+👉 [https://weather-dashboard-d2kq.onrender.com](https://weather-dashboard-d2kq.onrender.com)
+
+---
+
+## 💻 Frontend
+
+### Tech Stack
+- React + Vite
+- TypeScript
+- ShadCN UI + TailwindCSS
+- Axios + React Query
+
+### Scripts
+```bash
+# development
+npm run dev
+
+# build
+npm run build
+
+# production preview
+npm run preview
+```
+
+The frontend is deployed on Render:  
+👉 [https://weather-dashboard-1-1l6m.onrender.com/](https://weather-dashboard-1-1l6m.onrender.com/)
+
+---
+
+## 🔧 Setup (Local)
+
+### 1. Clone Repo
+```bash
+git clone https://github.com/your-username/weather-dashboard.git
 cd weather-dashboard
 ```
 
 ### 2. Backend Setup
-
-``` bash
+```bash
 cd backend
 npm install
-```
-
-Create a `.env` file in `/backend`:
-
-    PORT=4000
-    OPENWEATHER_API_KEY=your_openweather_api_key_here
-
-Run backend:
-
-``` bash
 npm run dev
 ```
 
 ### 3. Frontend Setup
-
-``` bash
+```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-The app will start at:\
-👉 **Frontend:** `http://localhost:5173`\
-👉 **Backend:** `http://localhost:4000`
+### 4. Environment Variables
 
-------------------------------------------------------------------------
+Backend `.env`:
+```env
+MONGO_URI=your_mongo_connection_string
+WEATHER_API_KEY=your_api_key
+PORT=5000
+```
 
-## 🔑 Get OpenWeather API Key
+Frontend `.env`:
+```env
+VITE_BACKEND_URL=http://localhost:5000
+```
 
-1.  Sign up at [OpenWeather](https://openweathermap.org/).
-2.  Go to **My API Keys** section.
-3.  Copy your API key and add it in `.env`.
+---
 
-------------------------------------------------------------------------
+## ✨ Features
+- Add and delete cities
+- View weather details (fetched from API)
+- Minimal and modern dashboard UI
+- Persistent data storage in MongoDB
 
-## 🧪 Testing
+---
 
--   Open the app in browser.
--   Add a city (e.g., `London`, `New York`).
--   Weather card should appear.
--   Remove the city to test delete functionality.
--   Restart app to check persistence if database is enabled.
-
-------------------------------------------------------------------------
-
-## 🛠 Tech Stack
-
--   **Frontend:** React, TypeScript, TailwindCSS
--   **Backend:** Node.js, Express
--   **Database (optional):** PostgreSQL / MongoDB
--   **API:** OpenWeatherMap
-
-------------------------------------------------------------------------
-
-## 📌 Todo / Improvements
-
--   Add user accounts (multi-user support).
--   Store cities in persistent DB (currently single-user demo).
--   Add forecast charts.
--   Mobile-friendly enhancements.
-
-------------------------------------------------------------------------
+## 📜 License
+MIT
