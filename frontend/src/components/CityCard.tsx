@@ -1,23 +1,64 @@
-interface Props {
-    city: string;
-    data: any;
+type WeatherItem = {
+    dt_txt: string;
+    main: {
+        temp: number;
+    };
+    weather: {
+        main: string;
+        description: string;
+    }[];
+};
+
+type CityInfo = {
+    name: string;
+};
+
+type WeatherData = {
+    city: CityInfo;
+    list: WeatherItem[];
+};
+
+interface CityCardProps {
+    data: WeatherData;
+    onRemove: (city: string) => void;
 }
 
-export default function CityCard({ city, data }: Props) {
-    if (!data) return <div className="p-4 bg-gray-100 rounded">Loading {city}...</div>;
+export default function CityCard({ data, onRemove }: CityCardProps) {
+    const cityName = data.city.name;
+    const current = data.list[0];
+    const daily = data.list.filter((f: WeatherItem) => f.dt_txt.includes("12:00:00"));
 
-    const today = data.list[0];
     return (
-        <div className="p-4 bg-white shadow rounded-xl">
-            <h2 className="text-xl font-semibold">{city}</h2>
-            <p>Temp: {today.main.temp}°C</p>
-            <p>{today.weather[0].description}</p>
-            <h3 className="mt-3 font-semibold">Next 5 Days:</h3>
-            <ul className="text-sm">
-                {data.list.slice(0, 5).map((item: any, i: number) => (
-                    <li key={i}>{item.dt_txt} → {item.main.temp}°C</li>
+        <div className="p-4 rounded shadow bg-white">
+            <h2 className="text-lg font-semibold flex justify-between">
+                {cityName}
+                <button
+                    onClick={() => onRemove(cityName)}
+                >
+                    ✕
+                </button>
+            </h2>
+
+            {/* Current Weather */}
+            <p className="text-2xl font-bold">
+                {Math.round(current.main.temp)}°C
+            </p>
+            <p className="capitalize">{current.weather[0].description}</p>
+
+            {/* Forecast */}
+            <h3 className="mt-4 font-medium">5-Day Forecast</h3>
+            <div className="grid grid-cols-5 gap-2 mt-2 text-center">
+                {daily.map((day: WeatherItem, i: number) => (
+                    <div
+                        key={i}
+                        className="p-2 bg-gray-100 rounded text-sm flex flex-col gap-1 w-16"
+                    >
+                        <p>{day.dt_txt.split(" ")[0].slice(5)}</p>
+                        <p>{Math.round(day.main.temp)}°</p>
+                        <p>{day.weather[0].main}</p>
+                    </div>
                 ))}
-            </ul>
+            </div>
         </div>
     );
 }
