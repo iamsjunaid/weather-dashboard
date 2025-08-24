@@ -100,12 +100,12 @@ Backend `.env`:
 ```env
 MONGO_URI=your_mongo_connection_string
 WEATHER_API_KEY=your_api_key
-PORT=5000
+PORT=4000
 ```
 
 Frontend `.env`:
 ```env
-VITE_BACKEND_URL=http://localhost:5000
+VITE_BACKEND_URL=http://localhost:4000
 ```
 
 ---
