@@ -7,7 +7,7 @@ import cors from "cors";
 const app = express();
 
 app.use(cors({
-  origin: "https://weather-dashboard-navy-five.vercel.app/",
+  origin: "https://weather-dashboard-1-1l6m.onrender.com",
   methods: ["GET", "POST", "DELETE"],
   credentials: true
 }));
