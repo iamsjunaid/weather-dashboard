@@ -1,122 +1,136 @@
-# 🌦 Weather Dashboard
+# 🌤️ Weather Dashboard
 
-A full-stack MERN application that allows users to add cities and view their weather data in a clean dashboard.
+A full-stack weather dashboard where users can add/remove cities and view real-time weather data.  
+The project integrates with the **OpenWeather API** and includes caching, error handling, and a minimal modern UI.
 
 ---
 
 ## 🚀 Live Demo
 
-- **Frontend (React + TypeScript + ShadCN UI)**: [Weather Dashboard Frontend](https://weather-dashboard-1-1l6m.onrender.com/)  
-- **Backend (Node.js + Express + MongoDB)**: [Weather Dashboard API](https://weather-dashboard-d2kq.onrender.com)
+- **Backend**: [Weather Dashboard API](https://weather-dashboard-d2kq.onrender.com)  
+- **Frontend**: [Weather Dashboard UI](https://weather-dashboard-1-1l6m.onrender.com/)
 
 ---
 
-## 📂 Project Structure
+## 📦 Tech Stack
 
-```
-weather-dashboard/
-│── backend/   # Node.js + Express + MongoDB + TypeScript
-│── frontend/  # React + TypeScript + ShadCN UI
-```
+### **Backend**
+- **Node.js + Express.js** → Web server and REST API  
+- **TypeScript** → Type safety for cleaner, more maintainable code  
+- **MongoDB (Mongoose)** → Database for storing cities and cached weather data  
+- **Axios** → For calling the OpenWeather API  
+- **dotenv** → Manage environment variables  
+- **CORS** → Handle cross-origin requests
 
----
-
-## ⚙️ Backend
-
-### Tech Stack
-- Node.js + Express.js
-- MongoDB + Mongoose
-- TypeScript
-- Axios (for weather API requests)
-- CORS + dotenv
-
-### Scripts
-```bash
-# development
-npm run dev
-
-# build
-npm run build
-
-# production
-npm start
-```
-
-The backend is deployed on Render:  
-👉 [https://weather-dashboard-d2kq.onrender.com](https://weather-dashboard-d2kq.onrender.com)
+### **Frontend**
+- **React + TypeScript** → Component-based UI  
+- **ShadCN UI** → Prebuilt, accessible, and modern components  
+- **Tailwind CSS** → Utility-first CSS framework for styling  
+- **React Query** → Data fetching, caching, and synchronization  
 
 ---
 
-## 💻 Frontend
+## ⚙️ Setup Instructions
 
-### Tech Stack
-- React + Vite
-- TypeScript
-- ShadCN UI + TailwindCSS
-- Axios + React Query
+### **Backend**
+1. Clone repo and navigate to `backend/`
+   ```bash
+   cd backend
+   npm install
+   ```
+2. Create a `.env` file:
+   ```env
+   PORT=5000
+   MONGO_URI=your_mongodb_connection
+   OPENWEATHER_API_KEY=your_openweather_api_key
+   ```
+3. Run locally:
+   ```bash
+   npm run dev
+   ```
+4. Build for production:
+   ```bash
+   npm run build
+   npm start
+   ```
 
-### Scripts
-```bash
-# development
-npm run dev
-
-# build
-npm run build
-
-# production preview
-npm run preview
-```
-
-The frontend is deployed on Render:  
-👉 [https://weather-dashboard-1-1l6m.onrender.com/](https://weather-dashboard-1-1l6m.onrender.com/)
-
----
-
-## 🔧 Setup (Local)
-
-### 1. Clone Repo
-```bash
-git clone https://github.com/your-username/weather-dashboard.git
-cd weather-dashboard
-```
-
-### 2. Backend Setup
-```bash
-cd backend
-npm install
-npm run dev
-```
-
-### 3. Frontend Setup
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-### 4. Environment Variables
-
-Backend `.env`:
-```env
-MONGO_URI=your_mongo_connection_string
-WEATHER_API_KEY=your_api_key
-PORT=4000
-```
-
-Frontend `.env`:
-```env
-VITE_BACKEND_URL=http://localhost:4000
-```
+### **Frontend**
+1. Navigate to `frontend/`
+   ```bash
+   cd frontend
+   npm install
+   ```
+2. When backend is running, add the following to `src/services/weatherApi.ts` and `src/services/cityApi.ts`:
+   ```typescript
+   const API_URL = "http://localhost:5000";
+   ```
+3. Run locally:
+   ```bash
+   npm run dev
+   ```
+4. Build for production:
+   ```bash
+   npm run build
+   npm run preview
+   ```
 
 ---
 
-## ✨ Features
-- Add and delete cities
-- View weather details (fetched from API)
-- Minimal and modern dashboard UI
-- Persistent data storage in MongoDB
+## 📖 API Documentation
+
+### **Base URL**
+```
+https://weather-dashboard-d2kq.onrender.com
+```
+
+### **Endpoints**
+
+#### `GET /weather/:city`
+Fetch weather details for a city.  
+Returns cached data if available.
+
+**Response Example**
+```json
+{
+  "city": "London",
+  "temperature": 18,
+  "description": "Cloudy",
+  "humidity": 75
+}
+```
+
+#### `GET /cities`
+Fetch all stored cities.
+
+#### `POST /cities`
+Add a new city.  
+**Body Example**
+```json
+{ "name": "Paris" }
+```
+
+#### `DELETE /cities/:name`
+Remove a city by name.
 
 ---
 
-## 📜 License
-MIT
+## ✅ Assumptions Made
+- Single-user dashboard (no authentication required).  
+- Cities are stored in MongoDB for persistence.  
+- Weather data is cached to reduce API calls.  
+
+---
+
+## ⚠️ Known Limitations
+- Only current weather is supported (no forecast).  
+- No role-based or multi-user authentication.  
+- Rate-limiting is not yet implemented for API protection.  
+
+---
+
+## 🌱 Future Improvements
+- Add **5-day forecast** feature.  
+- Implement **user accounts** for personalized dashboards.  
+- Add **search suggestions** for city names.  
+- Deploy with **Docker** for easier scaling.  
+- Add **unit/integration tests**.  
